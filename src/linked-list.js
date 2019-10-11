@@ -1,27 +1,91 @@
 const Node = require('./node');
 
 class LinkedList {
-    constructor() {}
+    constructor() {
+        this.arrList = [];
+        this.length = this.arrList.length;
+        this._tail;
+        this._head;
 
-    append(data) {}
+    }
 
-    head() {}
+    append(data) {
 
-    tail() {}
+        let instance = new Node(data);
+        this.arrList.push(instance);
+        this.length = this.arrList.length;
+        this._tail = this.arrList[this.arrList.length -1];
+        this._head = this.arrList[0];
+        return this;
+    }
 
-    at(index) {}
+    head() {
+        if(this.arrList.length == 0)return null;
+        return this._head.data
+    }
 
-    insertAt(index, data) {}
+    tail() {
+        if(this.arrList.length == 0)return null;
+        return this._tail.data
+    }
 
-    isEmpty() {}
+    at(index) {
+        return this.arrList[index].data
+    }
 
-    clear() {}
+    insertAt(index, data) {
+        let instance = [new Node(data)];
+        let arrStart = this.arrList.slice(0,index);
+        let arrEnd = this.arrList.slice(index);
+        let arrRess = arrStart.concat(instance,arrEnd);
+        this.arrList = arrRess;
+        this.length = this.arrList.length;
+        this._tail = this.arrList[this.arrList.length -1];
+        this._head = this.arrList[0];
 
-    deleteAt(index) {}
+    }
 
-    reverse() {}
+    isEmpty() {
+        return this.arrList.length <= 0 ? true : false;
+    }
 
-    indexOf(data) {}
+    clear() {
+        this.arrList = [];
+        this.length = this.arrList.length;
+        return this;
+
+
+    }
+
+    deleteAt(index) {
+
+        this.arrList.splice(index,1);
+        this.length = this.arrList.length;
+        this._tail = this.arrList[this.arrList.length -1];
+        this._head = this.arrList[0];
+        return this;
+
+    }
+
+    reverse() {
+        this.arrList.reverse();
+        this._tail = this.arrList[this.arrList.length -1];
+        this._head = this.arrList[0];
+        return this;
+
+    }
+
+    indexOf(data) {
+        let res = - 1;
+        for(let i = 0; i < this.arrList.length; i++){
+            if(this.arrList[i].data == data){
+                return i
+            }};
+        return res;
+
+
+
+    }
 }
 
 module.exports = LinkedList;
